@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>JSON и датасеты — JSON в ML</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cirrus-ui/dist/cirrus.min.css">
+    <link rel="stylesheet" href="css/style.css">
+<style>
+body { font-size: 1.05rem !important; line-height: 1.7 !important; }
+code { background-color: #ede9fe !important; color: #5b21b6 !important; padding: 2px 6px !important; border-radius: 4px !important; border: none !important; font-size: 0.88em !important; }
+pre code, .json-code-block code { background-color: transparent !important; color: inherit !important; padding: 0 !important; border: none !important; font-size: inherit !important; border-radius: 0 !important; }
+@media screen and (max-width: 768px) { .content-area { flex-direction: column !important; flex-wrap: wrap !important; } .sidebar { width: 100% !important; } }
+</style>
+</head>
+<body>
+
+    <header><div class="header site-header header-fixed u-unselectable header-animated">
+        <div class="header-brand">
+            <div class="nav-item no-hover">
+                <a href="index.html" class="site-logo">JSON&nbsp;<span>в ML</span></a>
+            </div>
+            <div class="nav-item nav-btn" id="header-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="header-nav" id="header-menu">
+            <nav><div class="nav-right">
+                <div class="nav-item">
+                    <a href="index.html">Главная</a>
+                </div>
+                <div class="nav-item">
+                    <a href="json.html">JSON</a>
+                </div>
+                <div class="nav-item">
+                    <a href="structure.html">Структура</a>
+                </div>
+                <div class="nav-item">
+                    <a href="ml.html">JSON в ML</a>
+                </div>
+                <div class="nav-item active">
+                    <a href="datasets.html">Датасеты</a>
+                </div>
+                <div class="nav-item">
+                    <a href="api.html">ML API</a>
+                </div>
+                <div class="nav-item">
+                    <a href="languages.html">Языки</a>
+                </div>
+                <div class="nav-item">
+                    <a href="pipeline.html">Пайплайн</a>
+                </div>
+                <div class="nav-item">
+                    <a href="example.html">Пример</a>
+                </div>
+                <div class="nav-item">
+                    <a href="conclusion.html">Итоги</a>
+                </div>
+            </div></nav>
+        </div>
+    </div>
+    </header>
+
+    <div class="site-main-wrapper" style="padding-top: 3.5rem;">
+
+        <div style="max-width: 1140px; margin: 0 auto; padding: 2rem 2.5rem;">
+            <div class="content-area" style="display: flex; flex-wrap: nowrap; gap: 2rem;">
+
+                <main class="main-content" style="flex: 1; min-width: 0;">
+
+                    <h1 style="color: #7c3aed; border-bottom: 3px solid #7c3aed; padding-bottom: 0.6rem; margin-bottom: 1.5rem; font-size: 1.8rem;">JSON и датасеты</h1>
+
+                    <section class="section-block">
+                        <h2>Данные для ML в формате JSON</h2>
+                        <p>В машинном обучении данные обычно представлены в табличном формате: строки — это объекты (наблюдения), столбцы — признаки. Хотя для хранения больших датасетов чаще используется CSV, JSON незаменим при передаче данных через API, сохранении отдельных записей и описании метаданных датасета.</p>
+                        <p>JSON позволяет представить каждую запись как объект с именованными полями, что делает данные самодокументируемыми — по ключам сразу видно, что означает каждое значение.</p>
+                    </section>
+
+                    <section class="section-block">
+                        <h2>Пример: одна запись датасета</h2>
+                        <p>Представим датасет для предсказания оттока клиентов. Одна запись в формате JSON:</p>
+                        <pre class="json-code-block" style="background-color:#e8e8e9 !important;color:#302687 !important;padding:1.25rem !important;border-radius:6px !important;overflow-x:auto !important;font-family:Courier New,Courier,monospace !important;font-size:0.9rem !important;line-height:1.6 !important;margin:0.75rem 0 !important;"><code>{
+    <span class="json-key">"customer_id"</span>: <span class="json-number">1042</span>,
+    <span class="json-key">"age"</span>: <span class="json-number">34</span>,
+    <span class="json-key">"gender"</span>: <span class="json-string">"female"</span>,
+    <span class="json-key">"tenure_months"</span>: <span class="json-number">18</span>,
+    <span class="json-key">"monthly_charges"</span>: <span class="json-number">72.5</span>,
+    <span class="json-key">"contract"</span>: <span class="json-string">"month-to-month"</span>,
+    <span class="json-key">"churn"</span>: <span class="json-bool">true</span>
+}</code></pre>
+                        <p>Каждый ключ — это название признака, а значение — данные конкретного клиента. Поле <code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">"churn"</code> — целевая переменная (то, что модель будет предсказывать).</p>
+                    </section>
+
+                    <section class="section-block">
+                        <h2>Несколько записей</h2>
+                        <p>Набор записей представляется как массив объектов:</p>
+                        <pre class="json-code-block" style="background-color:#e8e8e9 !important;color:#302687 !important;padding:1.25rem !important;border-radius:6px !important;overflow-x:auto !important;font-family:Courier New,Courier,monospace !important;font-size:0.9rem !important;line-height:1.6 !important;margin:0.75rem 0 !important;"><code>[
+    {
+        <span class="json-key">"age"</span>: <span class="json-number">25</span>,
+        <span class="json-key">"income"</span>: <span class="json-number">45000</span>,
+        <span class="json-key">"city"</span>: <span class="json-string">"Moscow"</span>,
+        <span class="json-key">"churn"</span>: <span class="json-bool">false</span>
+    },
+    {
+        <span class="json-key">"age"</span>: <span class="json-number">41</span>,
+        <span class="json-key">"income"</span>: <span class="json-number">82000</span>,
+        <span class="json-key">"city"</span>: <span class="json-string">"Saint Petersburg"</span>,
+        <span class="json-key">"churn"</span>: <span class="json-bool">true</span>
+    },
+    {
+        <span class="json-key">"age"</span>: <span class="json-number">29</span>,
+        <span class="json-key">"income"</span>: <span class="json-number">55000</span>,
+        <span class="json-key">"city"</span>: <span class="json-string">"Kazan"</span>,
+        <span class="json-key">"churn"</span>: <span class="json-bool">false</span>
+    }
+]</code></pre>
+                    </section>
+
+                    <section class="section-block">
+                        <h2>Табличное представление тех же данных</h2>
+                        <p>Те же записи в виде таблицы — привычный формат для ML-инженера:</p>
+                        <table class="table table-striped site-table">
+                            <thead>
+                                <tr>
+                                    <th>age</th>
+                                    <th>income</th>
+                                    <th>city</th>
+                                    <th>churn</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>25</td>
+                                    <td>45 000</td>
+                                    <td>Moscow</td>
+                                    <td>false</td>
+                                </tr>
+                                <tr>
+                                    <td>41</td>
+                                    <td>82 000</td>
+                                    <td>Saint Petersburg</td>
+                                    <td>true</td>
+                                </tr>
+                                <tr>
+                                    <td>29</td>
+                                    <td>55 000</td>
+                                    <td>Kazan</td>
+                                    <td>false</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>JSON и таблица содержат одни и те же данные. Разница в том, что JSON — это текстовый формат для передачи данных между программами, а таблица — визуальное представление для человека.</p>
+                    </section>
+
+                    <section class="section-block">
+                        <h2>Метаданные датасета</h2>
+                        <p>Помимо самих данных, в JSON удобно хранить описание датасета — метаданные. Это помогает другим разработчикам понять, с какими данными они работают.</p>
+                        <pre class="json-code-block" style="background-color:#e8e8e9 !important;color:#302687 !important;padding:1.25rem !important;border-radius:6px !important;overflow-x:auto !important;font-family:Courier New,Courier,monospace !important;font-size:0.9rem !important;line-height:1.6 !important;margin:0.75rem 0 !important;"><code>{
+    <span class="json-key">"name"</span>: <span class="json-string">"customer_churn_dataset"</span>,
+    <span class="json-key">"version"</span>: <span class="json-string">"2.1"</span>,
+    <span class="json-key">"num_records"</span>: <span class="json-number">7043</span>,
+    <span class="json-key">"num_features"</span>: <span class="json-number">19</span>,
+    <span class="json-key">"target"</span>: <span class="json-string">"churn"</span>,
+    <span class="json-key">"task"</span>: <span class="json-string">"binary_classification"</span>,
+    <span class="json-key">"features"</span>: [
+        {<span class="json-key">"name"</span>: <span class="json-string">"age"</span>, <span class="json-key">"type"</span>: <span class="json-string">"numeric"</span>},
+        {<span class="json-key">"name"</span>: <span class="json-string">"gender"</span>, <span class="json-key">"type"</span>: <span class="json-string">"categorical"</span>},
+        {<span class="json-key">"name"</span>: <span class="json-string">"tenure_months"</span>, <span class="json-key">"type"</span>: <span class="json-string">"numeric"</span>},
+        {<span class="json-key">"name"</span>: <span class="json-string">"monthly_charges"</span>, <span class="json-key">"type"</span>: <span class="json-string">"numeric"</span>},
+        {<span class="json-key">"name"</span>: <span class="json-string">"contract"</span>, <span class="json-key">"type"</span>: <span class="json-string">"categorical"</span>}
+    ],
+    <span class="json-key">"source"</span>: <span class="json-string">"Kaggle"</span>,
+    <span class="json-key">"license"</span>: <span class="json-string">"CC BY 4.0"</span>
+}</code></pre>
+                    </section>
+
+                    <section class="section-block">
+                        <h2>JSON vs CSV для датасетов</h2>
+                        <p>Оба формата широко используются в ML, но у каждого свои сильные стороны:</p>
+                        <table class="table table-striped site-table">
+                            <thead>
+                                <tr>
+                                    <th>Критерий</th>
+                                    <th>JSON</th>
+                                    <th>CSV</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Читаемость</td>
+                                    <td>Высокая: ключи описывают данные</td>
+                                    <td>Средняя: нужна строка заголовков</td>
+                                </tr>
+                                <tr>
+                                    <td>Вложенные структуры</td>
+                                    <td>Поддерживает</td>
+                                    <td>Не поддерживает</td>
+                                </tr>
+                                <tr>
+                                    <td>Размер файла</td>
+                                    <td>Больше (ключи повторяются)</td>
+                                    <td>Компактнее</td>
+                                </tr>
+                                <tr>
+                                    <td>Использование в API</td>
+                                    <td>Стандарт</td>
+                                    <td>Редко</td>
+                                </tr>
+                                <tr>
+                                    <td>Хранение больших датасетов</td>
+                                    <td>Не оптимально</td>
+                                    <td>Стандартный выбор</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>На практике большие датасеты хранятся в CSV или Parquet, а JSON используется для передачи отдельных записей через API и хранения метаданных.</p>
+                    </section>
+
+                </main>
+
+                <aside class="sidebar" style="width: 260px; flex-shrink: 0;">
+                    <div class="sidebar-block">
+                        <h3>Навигация</h3>
+                        <ul class="sidebar-nav-list">
+                            <li><a href="index.html">Главная</a></li>
+                            <li><a href="json.html">Что такое JSON</a></li>
+                            <li><a href="structure.html">Структура JSON</a></li>
+                            <li><a href="ml.html">JSON в ML</a></li>
+                            <li><a href="datasets.html" class="active">Датасеты</a></li>
+                            <li><a href="api.html">ML API</a></li>
+                            <li><a href="languages.html">Языки</a></li>
+                            <li><a href="pipeline.html">ML-пайплайн</a></li>
+                            <li><a href="example.html">Пример</a></li>
+                            <li><a href="conclusion.html">Итоги</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-block">
+                        <h3>Фан факт</h3>
+                        <p>Формат JSON Lines (.jsonl) — это вариант JSON, где каждая строка файла является отдельным JSON-объектом. Такой формат часто используется для хранения больших датасетов, потому что позволяет читать файл построчно без загрузки в память целиком.</p>
+                    </div>
+
+                    <div class="sidebar-block">
+                        <h3>Подписка на обновления</h3>
+                        <form class="sidebar-subscribe" action="#" method="get">
+                            <input type="email" placeholder="Ваш email" aria-label="Email для подписки">
+                            <button type="submit">Подписаться</button>
+                        </form>
+                    </div>
+                </aside>
+
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="site-footer" style="padding: 2rem 2.5rem;">
+        <div class="footer-content" style="max-width: 1140px; margin: 0 auto; padding: 0 1rem;">
+            <div class="footer-section">
+                <h3>JSON в ML</h3>
+                <p style="font-size: 0.9rem; color: #bdc3c7;">Учебный проект о формате JSON и его применении в машинном обучении</p>
+            </div>
+            <div class="footer-section">
+                <h3>Разделы</h3>
+                <ul>
+                    <li><a href="json.html">Что такое JSON</a></li>
+                    <li><a href="ml.html">JSON в ML</a></li>
+                    <li><a href="languages.html">Языки программирования</a></li>
+                    <li><a href="example.html">Практический пример</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <ul>
+                    <li><a href="mailto:listarovaaleksandra@gmail.com">listarovaaleksandra@gmail.com</a></li>
+                    <li><a href="https://github.com/listarova-aleksandra" target="_blank" rel="noopener">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom" style="max-width: 1140px; margin: 1.5rem auto 0; padding-top: 1rem;">
+            <p>&copy; 2026 JSON в ML. Учебный проект. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+    document.getElementById('header-btn').addEventListener('click', function() {
+        var menu = document.getElementById('header-menu');
+        this.classList.toggle('active');
+        menu.classList.toggle('active');
+    });
+    </script>
+
+</body>
+</html>

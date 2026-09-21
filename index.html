@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>JSON в ML</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cirrus-ui/dist/cirrus.min.css">
+    <link rel="stylesheet" href="css/style.css">
+<style>
+body { font-size: 1.05rem !important; line-height: 1.7 !important; }
+code { background-color: #ede9fe !important; color: #5b21b6 !important; padding: 2px 6px !important; border-radius: 4px !important; border: none !important; font-size: 0.88em !important; }
+pre code, .json-code-block code { background-color: transparent !important; color: inherit !important; padding: 0 !important; border: none !important; font-size: inherit !important; border-radius: 0 !important; }
+@media screen and (max-width: 768px) { .content-area { flex-direction: column !important; flex-wrap: wrap !important; } .sidebar { width: 100% !important; } }
+</style>
+</head>
+<body>
+
+    <header><div class="header site-header header-fixed u-unselectable header-animated">
+        <div class="header-brand">
+            <div class="nav-item no-hover">
+                <a href="index.html" class="site-logo">JSON&nbsp;<span>в ML</span></a>
+            </div>
+            <div class="nav-item nav-btn" id="header-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="header-nav" id="header-menu">
+            <nav><div class="nav-right">
+                <div class="nav-item active">
+                    <a href="index.html">Главная</a>
+                </div>
+                <div class="nav-item">
+                    <a href="json.html">JSON</a>
+                </div>
+                <div class="nav-item">
+                    <a href="structure.html">Структура</a>
+                </div>
+                <div class="nav-item">
+                    <a href="ml.html">JSON в ML</a>
+                </div>
+                <div class="nav-item">
+                    <a href="datasets.html">Датасеты</a>
+                </div>
+                <div class="nav-item">
+                    <a href="api.html">ML API</a>
+                </div>
+                <div class="nav-item">
+                    <a href="languages.html">Языки</a>
+                </div>
+                <div class="nav-item">
+                    <a href="pipeline.html">Пайплайн</a>
+                </div>
+                <div class="nav-item">
+                    <a href="example.html">Пример</a>
+                </div>
+                <div class="nav-item">
+                    <a href="conclusion.html">Итоги</a>
+                </div>
+            </div></nav>
+        </div>
+    </div>
+    </header>
+
+    <div class="site-main-wrapper" style="padding-top: 3.5rem;">
+
+        <section class="hero-section" style="padding: 3rem 2.5rem; text-align: center;">
+            <h1 style="color: #7c3aed; border-bottom: 3px solid #7c3aed; padding-bottom: 0.6rem; margin-bottom: 1.5rem; font-size: 1.8rem;">JSON в ML</h1>
+            <p>JSON и его роль в передаче данных, настройке моделей и обмене датой в ML</p>
+        </section>
+
+        <div style="max-width: 1140px; margin: 0 auto; padding: 2rem 2.5rem;">
+            <div class="content-area" style="display: flex; flex-wrap: nowrap; gap: 2rem;">
+
+                <main class="main-content" style="flex: 1; min-width: 0;">
+                    <section class="section-block">
+                        <h2>О проекте</h2>
+                        <p>Привет! Меня зовут Саша. Я ML-инженер, мне нравится работать с данными, строить модели и решать прикладные задачи, используя ML. Но так вышло, что мне надо написать лабу по вебу, используя HTML, CSS и фреймворк Cirrus. Поэтому я решила совместить полезное с приятным: рассказать на этом сайте о роли JSON в ML.</p>
+                    </section>
+
+                    <section class="section-block">
+                        <h2>Зачем JSON нужен в ML</h2>
+                        <ul>
+                            <li>Хранение параметров и гиперпараметров моделей</li>
+                            <li>Описание структуры входных и выходных данных</li>
+                            <li>Обмен данными между сервисами через REST API</li>
+                            <li>Сохранение метаданных экспериментов</li>
+                            <li>Передача признаков и предсказаний в продакшен-системах</li>
+                        </ul>
+                    </section>
+
+                    <section class="section-block">
+                        <h2>Как JSON участвует в ML</h2>
+                        <img
+                            src="images/pipeline-800.png"
+                            srcset="images/pipeline-400.png 400w, images/pipeline-800.png 800w"
+                            sizes="(max-width: 600px) 400px, 800px"
+                            alt="Схема ML-пайплайна: JSON на входе и выходе"
+                            title="JSON используется на каждом этапе ML-пайплайна"
+                            style="width: 100%; max-width: 600px; display: block; margin: 0 auto 1rem; border-radius: 6px; border: 1px solid #e2e8f0;"
+                        >
+                        <p>JSON присутствует на каждом этапе: от входных данных до результата предсказания.</p>
+                    </section>
+
+                    <section class="section-block">
+                        <h2>Пример: конфигурация ML-модели</h2>
+                        <p>Типичный файл конфигурации модели машинного обучения в формате JSON выглядит так:</p>
+                        <pre class="json-code-block" style="background-color:#e8e8e9 !important;color:#302687 !important;padding:1.25rem !important;border-radius:6px !important;overflow-x:auto !important;font-family:Courier New,Courier,monospace !important;font-size:0.9rem !important;line-height:1.6 !important;margin:0.75rem 0 !important;"><code>{
+    <span class="json-key">"model"</span>: <span class="json-string">"RandomForest"</span>,
+    <span class="json-key">"task"</span>: <span class="json-string">"classification"</span>,
+    <span class="json-key">"parameters"</span>: {
+        <span class="json-key">"n_estimators"</span>: <span class="json-number">100</span>,
+        <span class="json-key">"max_depth"</span>: <span class="json-number">10</span>,
+        <span class="json-key">"random_state"</span>: <span class="json-number">42</span>
+    }
+}</code></pre>
+                        <p>Этот JSON описывает модель Random Forest с тремя параметрами. Такие файлы помогают быстро менять настройки модели без изменения кода.</p>
+                    </section>
+
+                    <section class="section-block">
+                        <h2>Разделы сайта</h2>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                            <div class="nav-card">
+                                <h3><a href="json.html">Что такое JSON</a></h3>
+                                <p>Основы формата, типы данных, синтаксис</p>
+                            </div>
+                            <div class="nav-card">
+                                <h3><a href="structure.html">Структура JSON</a></h3>
+                                <p>Объекты, массивы, вложенность</p>
+                            </div>
+                            <div class="nav-card">
+                                <h3><a href="ml.html">JSON в ML</a></h3>
+                                <p>Применение JSON в машинном обучении</p>
+                            </div>
+                            <div class="nav-card">
+                                <h3><a href="datasets.html">Датасеты</a></h3>
+                                <p>Представление данных для ML в JSON</p>
+                            </div>
+                            <div class="nav-card">
+                                <h3><a href="api.html">ML API</a></h3>
+                                <p>JSON в API машинного обучения</p>
+                            </div>
+                            <div class="nav-card">
+                                <h3><a href="languages.html">Языки</a></h3>
+                                <p>Работа с JSON в Python, JS, C++, Java</p>
+                            </div>
+                            <div class="nav-card">
+                                <h3><a href="pipeline.html">ML-пайплайн</a></h3>
+                                <p>JSON на каждом этапе пайплайна</p>
+                            </div>
+                            <div class="nav-card">
+                                <h3><a href="example.html">Пример</a></h3>
+                                <p>Демо-кейс предсказания на JSON</p>
+                            </div>
+                            <div class="nav-card">
+                                <h3><a href="conclusion.html">Итоги</a></h3>
+                                <p>Резюме и полезные ссылки</p>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+
+                <aside class="sidebar" style="width: 260px; flex-shrink: 0;">
+                    <div class="sidebar-block">
+                        <h3>Навигация</h3>
+                        <ul class="sidebar-nav-list">
+                            <li><a href="index.html" class="active">Главная</a></li>
+                            <li><a href="json.html">Что такое JSON</a></li>
+                            <li><a href="structure.html">Структура JSON</a></li>
+                            <li><a href="ml.html">JSON в ML</a></li>
+                            <li><a href="datasets.html">Датасеты</a></li>
+                            <li><a href="api.html">ML API</a></li>
+                            <li><a href="languages.html">Языки</a></li>
+                            <li><a href="pipeline.html">ML-пайплайн</a></li>
+                            <li><a href="example.html">Пример</a></li>
+                            <li><a href="conclusion.html">Итоги</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-block">
+                        <h3>Фан факт</h3>
+                        <p>JSON был создан Дугласом Крокфордом в начале 2000-х годов. Сегодня это самый популярный формат обмена данными в веб-приложениях и ML-сервисах.</p>
+                    </div>
+
+                    <div class="sidebar-block">
+                        <h3>Подписка на обновления</h3>
+                        <form class="sidebar-subscribe" action="#" method="get">
+                            <input type="email" placeholder="Ваш email" aria-label="Email для подписки">
+                            <button type="submit">Подписаться</button>
+                        </form>
+                    </div>
+                </aside>
+
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="site-footer" style="padding: 2rem 2.5rem;">
+        <div class="footer-content" style="max-width: 1140px; margin: 0 auto; padding: 0 1rem;">
+            <div class="footer-section">
+                <h3>JSON в ML</h3>
+                <p style="font-size: 0.9rem; color: #bdc3c7;">Учебный проект о формате JSON и его применении в машинном обучении</p>
+            </div>
+            <div class="footer-section">
+                <h3>Разделы</h3>
+                <ul>
+                    <li><a href="json.html">Что такое JSON</a></li>
+                    <li><a href="ml.html">JSON в ML</a></li>
+                    <li><a href="languages.html">Языки программирования</a></li>
+                    <li><a href="example.html">Практический пример</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <ul>
+                    <li><a href="mailto:listarovaaleksandra@gmail.com">listarovaaleksandra@gmail.com</a></li>
+                    <li><a href="https://github.com/listarova-aleksandra" target="_blank" rel="noopener">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom" style="max-width: 1140px; margin: 1.5rem auto 0; padding-top: 1rem;">
+            <p>&copy; 2026 JSON в ML. Учебный проект. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+    document.getElementById('header-btn').addEventListener('click', function() {
+        var menu = document.getElementById('header-menu');
+        this.classList.toggle('active');
+        menu.classList.toggle('active');
+    });
+    </script>
+
+</body>
+</html>

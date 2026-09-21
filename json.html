@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>Что такое JSON — JSON в ML</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cirrus-ui/dist/cirrus.min.css">
+    <link rel="stylesheet" href="css/style.css">
+<style>
+body { font-size: 1.05rem !important; line-height: 1.7 !important; }
+code { background-color: #ede9fe !important; color: #5b21b6 !important; padding: 2px 6px !important; border-radius: 4px !important; border: none !important; font-size: 0.88em !important; }
+pre code, .json-code-block code { background-color: transparent !important; color: inherit !important; padding: 0 !important; border: none !important; font-size: inherit !important; border-radius: 0 !important; }
+@media screen and (max-width: 768px) { .content-area { flex-direction: column !important; flex-wrap: wrap !important; } .sidebar { width: 100% !important; } }
+</style>
+</head>
+<body>
+
+    <header><div class="header site-header header-fixed u-unselectable header-animated">
+        <div class="header-brand">
+            <div class="nav-item no-hover">
+                <a href="index.html" class="site-logo">JSON&nbsp;<span>в ML</span></a>
+            </div>
+            <div class="nav-item nav-btn" id="header-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="header-nav" id="header-menu">
+            <nav><div class="nav-right">
+                <div class="nav-item">
+                    <a href="index.html">Главная</a>
+                </div>
+                <div class="nav-item active">
+                    <a href="json.html">JSON</a>
+                </div>
+                <div class="nav-item">
+                    <a href="structure.html">Структура</a>
+                </div>
+                <div class="nav-item">
+                    <a href="ml.html">JSON в ML</a>
+                </div>
+                <div class="nav-item">
+                    <a href="datasets.html">Датасеты</a>
+                </div>
+                <div class="nav-item">
+                    <a href="api.html">ML API</a>
+                </div>
+                <div class="nav-item">
+                    <a href="languages.html">Языки</a>
+                </div>
+                <div class="nav-item">
+                    <a href="pipeline.html">Пайплайн</a>
+                </div>
+                <div class="nav-item">
+                    <a href="example.html">Пример</a>
+                </div>
+                <div class="nav-item">
+                    <a href="conclusion.html">Итоги</a>
+                </div>
+            </div></nav>
+        </div>
+    </div>
+    </header>
+
+    <div class="site-main-wrapper" style="padding-top: 3.5rem;">
+
+        <div style="max-width: 1140px; margin: 0 auto; padding: 2rem 2.5rem;">
+            <div class="content-area" style="display: flex; flex-wrap: nowrap; gap: 2rem;">
+
+                <main class="main-content" style="flex: 1; min-width: 0;">
+
+                    <h1 style="color: #7c3aed; border-bottom: 3px solid #7c3aed; padding-bottom: 0.6rem; margin-bottom: 1.5rem; font-size: 1.8rem;">Что такое JSON</h1>
+
+                    <section class="section-block">
+                        <h2>Определение</h2>
+                        <p>JSON (JavaScript Object Notation) — это текстовый формат обмена данными, основанный на синтаксисе объектов JavaScript. Несмотря на название, JSON является языконезависимым форматом и используется практически во всех современных языках программирования.</p>
+                        <p>JSON был предложен Дугласом Крокфордом в начале 2000-х годов как лёгкая альтернатива формату XML. Благодаря простоте и читаемости JSON быстро стал стандартом для обмена данными в веб-приложениях, API и системах машинного обучения.</p>
+                    </section>
+
+                    <section class="section-block">
+                        <h2>Основные свойства JSON</h2>
+                        <ul>
+                            <li>Текстовый формат, удобный для чтения человеком</li>
+                            <li>Лёгкий и компактный по сравнению с XML</li>
+                            <li>Языконезависимый — поддерживается в Python, JavaScript, Java, C++ и других языках</li>
+                            <li>Поддерживает вложенные структуры данных</li>
+                            <li>Используется как стандарт для REST API</li>
+                            <li>Легко парсится и генерируется программами</li>
+                        </ul>
+                    </section>
+
+                    <section class="section-block">
+                        <h2>Типы данных в JSON</h2>
+                        <p>JSON поддерживает шесть типов данных. Рассмотрим каждый из них с примерами.</p>
+
+                        <h3>Строка (string)</h3>
+                        <p>Строка — это последовательность символов в двойных кавычках. Одинарные кавычки в JSON не допускаются.</p>
+                        <pre class="json-code-block" style="background-color:#e8e8e9 !important;color:#302687 !important;padding:1.25rem !important;border-radius:6px !important;overflow-x:auto !important;font-family:Courier New,Courier,monospace !important;font-size:0.9rem !important;line-height:1.6 !important;margin:0.75rem 0 !important;"><code><span class="json-key">"name"</span>: <span class="json-string">"RandomForest"</span></code></pre>
+
+                        <h3>Число (number)</h3>
+                        <p>Числа записываются без кавычек. Поддерживаются целые числа и числа с плавающей точкой.</p>
+                        <pre class="json-code-block" style="background-color:#e8e8e9 !important;color:#302687 !important;padding:1.25rem !important;border-radius:6px !important;overflow-x:auto !important;font-family:Courier New,Courier,monospace !important;font-size:0.9rem !important;line-height:1.6 !important;margin:0.75rem 0 !important;"><code><span class="json-key">"n_estimators"</span>: <span class="json-number">100</span>
+<span class="json-key">"learning_rate"</span>: <span class="json-number">0.01</span></code></pre>
+
+                        <h3>Логическое значение (boolean)</h3>
+                        <p>Может быть только <code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">true</code> или <code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">false</code> (без кавычек, в нижнем регистре).</p>
+                        <pre class="json-code-block" style="background-color:#e8e8e9 !important;color:#302687 !important;padding:1.25rem !important;border-radius:6px !important;overflow-x:auto !important;font-family:Courier New,Courier,monospace !important;font-size:0.9rem !important;line-height:1.6 !important;margin:0.75rem 0 !important;"><code><span class="json-key">"is_trained"</span>: <span class="json-bool">true</span>
+<span class="json-key">"use_gpu"</span>: <span class="json-bool">false</span></code></pre>
+
+                        <h3>Null</h3>
+                        <p>Специальное значение, обозначающее отсутствие данных. Записывается без кавычек.</p>
+                        <pre class="json-code-block" style="background-color:#e8e8e9 !important;color:#302687 !important;padding:1.25rem !important;border-radius:6px !important;overflow-x:auto !important;font-family:Courier New,Courier,monospace !important;font-size:0.9rem !important;line-height:1.6 !important;margin:0.75rem 0 !important;"><code><span class="json-key">"validation_score"</span>: <span class="json-null">null</span></code></pre>
+
+                        <h3>Массив (array)</h3>
+                        <p>Упорядоченный список значений в квадратных скобках. Элементы массива могут быть любого типа.</p>
+                        <pre class="json-code-block" style="background-color:#e8e8e9 !important;color:#302687 !important;padding:1.25rem !important;border-radius:6px !important;overflow-x:auto !important;font-family:Courier New,Courier,monospace !important;font-size:0.9rem !important;line-height:1.6 !important;margin:0.75rem 0 !important;"><code><span class="json-key">"features"</span>: [<span class="json-string">"age"</span>, <span class="json-string">"income"</span>, <span class="json-string">"city"</span>]
+<span class="json-key">"scores"</span>: [<span class="json-number">0.85</span>, <span class="json-number">0.91</span>, <span class="json-number">0.88</span>]</code></pre>
+
+                        <h3>Объект (object)</h3>
+                        <p>Набор пар «ключ — значение» в фигурных скобках. Ключ всегда строка, значение — любой тип JSON.</p>
+                        <pre class="json-code-block" style="background-color:#e8e8e9 !important;color:#302687 !important;padding:1.25rem !important;border-radius:6px !important;overflow-x:auto !important;font-family:Courier New,Courier,monospace !important;font-size:0.9rem !important;line-height:1.6 !important;margin:0.75rem 0 !important;"><code>{
+    <span class="json-key">"model"</span>: <span class="json-string">"LogisticRegression"</span>,
+    <span class="json-key">"accuracy"</span>: <span class="json-number">0.92</span>,
+    <span class="json-key">"is_trained"</span>: <span class="json-bool">true</span>
+}</code></pre>
+                    </section>
+
+                    <section class="section-block">
+                        <h2>Сводная таблица типов данных</h2>
+                        <table class="table table-striped site-table">
+                            <thead>
+                                <tr>
+                                    <th>Тип данных</th>
+                                    <th>Пример</th>
+                                    <th>Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Строка</td>
+                                    <td><code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">"hello"</code></td>
+                                    <td>Текст в двойных кавычках</td>
+                                </tr>
+                                <tr>
+                                    <td>Число</td>
+                                    <td><code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">42</code>, <code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">3.14</code></td>
+                                    <td>Целое или с плавающей точкой</td>
+                                </tr>
+                                <tr>
+                                    <td>Boolean</td>
+                                    <td><code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">true</code>, <code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">false</code></td>
+                                    <td>Логическое значение</td>
+                                </tr>
+                                <tr>
+                                    <td>Null</td>
+                                    <td><code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">null</code></td>
+                                    <td>Отсутствие значения</td>
+                                </tr>
+                                <tr>
+                                    <td>Массив</td>
+                                    <td><code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">[1, 2, 3]</code></td>
+                                    <td>Упорядоченный список значений</td>
+                                </tr>
+                                <tr>
+                                    <td>Объект</td>
+                                    <td><code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">{"a": 1}</code></td>
+                                    <td>Набор пар ключ-значение</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section class="section-block">
+                        <h2>Полный пример JSON</h2>
+                        <p>Вот пример JSON-документа, который описывает ML-эксперимент. В нём используются все типы данных:</p>
+                        <pre class="json-code-block" style="background-color:#e8e8e9 !important;color:#302687 !important;padding:1.25rem !important;border-radius:6px !important;overflow-x:auto !important;font-family:Courier New,Courier,monospace !important;font-size:0.9rem !important;line-height:1.6 !important;margin:0.75rem 0 !important;"><code>{
+    <span class="json-key">"experiment_name"</span>: <span class="json-string">"classification_v1"</span>,
+    <span class="json-key">"model"</span>: <span class="json-string">"RandomForest"</span>,
+    <span class="json-key">"n_estimators"</span>: <span class="json-number">200</span>,
+    <span class="json-key">"accuracy"</span>: <span class="json-number">0.94</span>,
+    <span class="json-key">"is_deployed"</span>: <span class="json-bool">false</span>,
+    <span class="json-key">"failed_reason"</span>: <span class="json-null">null</span>,
+    <span class="json-key">"features"</span>: [<span class="json-string">"age"</span>, <span class="json-string">"income"</span>, <span class="json-string">"region"</span>],
+    <span class="json-key">"metrics"</span>: {
+        <span class="json-key">"precision"</span>: <span class="json-number">0.91</span>,
+        <span class="json-key">"recall"</span>: <span class="json-number">0.89</span>,
+        <span class="json-key">"f1_score"</span>: <span class="json-number">0.90</span>
+    }
+}</code></pre>
+                        <p>В этом примере: <code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">experiment_name</code> и <code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">model</code> — строки, <code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">n_estimators</code> и <code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">accuracy</code> — числа, <code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">is_deployed</code> — boolean, <code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">failed_reason</code> — null, <code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">features</code> — массив строк, <code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">metrics</code> — вложенный объект с числовыми значениями.</p>
+                    </section>
+
+                    <section class="section-block">
+                        <h2>JSON vs XML</h2>
+                        <p>JSON часто сравнивают с XML — другим форматом обмена данными. Вот те же данные в обоих форматах:</p>
+                        <h3>JSON</h3>
+                        <pre class="json-code-block" style="background-color:#e8e8e9 !important;color:#302687 !important;padding:1.25rem !important;border-radius:6px !important;overflow-x:auto !important;font-family:Courier New,Courier,monospace !important;font-size:0.9rem !important;line-height:1.6 !important;margin:0.75rem 0 !important;"><code>{
+    <span class="json-key">"model"</span>: <span class="json-string">"RandomForest"</span>,
+    <span class="json-key">"accuracy"</span>: <span class="json-number">0.94</span>
+}</code></pre>
+                        <h3>XML</h3>
+                        <pre class="json-code-block" style="background-color:#e8e8e9 !important;color:#302687 !important;padding:1.25rem !important;border-radius:6px !important;overflow-x:auto !important;font-family:Courier New,Courier,monospace !important;font-size:0.9rem !important;line-height:1.6 !important;margin:0.75rem 0 !important;"><code>&lt;model&gt;
+    &lt;name&gt;RandomForest&lt;/name&gt;
+    &lt;accuracy&gt;0.94&lt;/accuracy&gt;
+&lt;/model&gt;</code></pre>
+                        <p>JSON компактнее и проще для чтения. Именно поэтому большинство современных API и ML-фреймворков используют JSON вместо XML.</p>
+                    </section>
+
+                </main>
+
+                <aside class="sidebar" style="width: 260px; flex-shrink: 0;">
+                    <div class="sidebar-block">
+                        <h3>Навигация</h3>
+                        <ul class="sidebar-nav-list">
+                            <li><a href="index.html">Главная</a></li>
+                            <li><a href="json.html" class="active">Что такое JSON</a></li>
+                            <li><a href="structure.html">Структура JSON</a></li>
+                            <li><a href="ml.html">JSON в ML</a></li>
+                            <li><a href="datasets.html">Датасеты</a></li>
+                            <li><a href="api.html">ML API</a></li>
+                            <li><a href="languages.html">Языки</a></li>
+                            <li><a href="pipeline.html">ML-пайплайн</a></li>
+                            <li><a href="example.html">Пример</a></li>
+                            <li><a href="conclusion.html">Итоги</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-block">
+                        <h3>Фан факт</h3>
+                        <p>Расширение файлов JSON — <code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">.json</code>, а MIME-тип — <code style="background-color:#ede9fe !important;color:#5b21b6 !important;padding:2px 6px !important;border-radius:4px !important;border:none !important;font-size:0.88em !important;">application/json</code>. Эти данные нужны, чтобы браузеры и серверы правильно распознавали формат.</p>
+                    </div>
+
+                    <div class="sidebar-block">
+                        <h3>Подписка на обновления</h3>
+                        <form class="sidebar-subscribe" action="#" method="get">
+                            <input type="email" placeholder="Ваш email" aria-label="Email для подписки">
+                            <button type="submit">Подписаться</button>
+                        </form>
+                    </div>
+                </aside>
+
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="site-footer" style="padding: 2rem 2.5rem;">
+        <div class="footer-content" style="max-width: 1140px; margin: 0 auto; padding: 0 1rem;">
+            <div class="footer-section">
+                <h3>JSON в ML</h3>
+                <p style="font-size: 0.9rem; color: #bdc3c7;">Учебный проект о формате JSON и его применении в машинном обучении</p>
+            </div>
+            <div class="footer-section">
+                <h3>Разделы</h3>
+                <ul>
+                    <li><a href="json.html">Что такое JSON</a></li>
+                    <li><a href="ml.html">JSON в ML</a></li>
+                    <li><a href="languages.html">Языки программирования</a></li>
+                    <li><a href="example.html">Практический пример</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <ul>
+                    <li><a href="mailto:listarovaaleksandra@gmail.com">listarovaaleksandra@gmail.com</a></li>
+                    <li><a href="https://github.com/listarova-aleksandra" target="_blank" rel="noopener">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom" style="max-width: 1140px; margin: 1.5rem auto 0; padding-top: 1rem;">
+            <p>&copy; 2026 JSON в ML. Учебный проект. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+    document.getElementById('header-btn').addEventListener('click', function() {
+        var menu = document.getElementById('header-menu');
+        this.classList.toggle('active');
+        menu.classList.toggle('active');
+    });
+    </script>
+
+</body>
+</html>
